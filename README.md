@@ -1,11 +1,10 @@
-# What-Moves-Broad-Money-Evidence-from-Five-Asian-Economies
 <!-- Repo settings
 About: Interactive dashboard for a thesis on how FDI, interest rates and trade openness relate to broad money in five Asian economies (2011-2023).
 Topics: economics, thesis, panel-data, monetary-economics, broad-money, fdi, asia, data-visualization, dashboard, javascript
 Tip: rename Thesis_BroadMoney_Dashboard.html to index.html and enable GitHub Pages to get a live demo link.
 -->
 
-# Broad Money in Five Asian Economies
+# What-Moves-Broad-Money-Evidence-from-Five-Asian-Economies
 
 Interactive companion to a thesis on **FDI, interest rates and trade openness** versus **broad money (% of GDP)** in Indonesia, Malaysia, the Philippines, Thailand and Vietnam, **2011-2023**.
 
@@ -30,7 +29,7 @@ Interactive companion to a thesis on **FDI, interest rates and trade openness** 
 65 observations (5 countries x 13 years): broad money (% of GDP), FDI net inflows (log of US$), policy interest rate (%), trade openness (% of GDP). Sources: World Bank and central banks.
 
 ## Run it
-Open `Thesis_BroadMoney_Dashboard.html` in any browser. No install, no dependencies, works offline.
+Open index.html in any browser. No install, no dependencies, works offline.
 
 ## Skills demonstrated
 Turning theory into testable hypotheses, separating between-country from within-country variation, communicating statistics in plain language, interactive dashboard design. Next step: panel regression with fixed effects.
