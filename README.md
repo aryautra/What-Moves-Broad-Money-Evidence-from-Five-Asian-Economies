@@ -9,7 +9,7 @@ Tip: rename Thesis_BroadMoney_Dashboard.html to index.html and enable GitHub Pag
 
 Interactive companion to a thesis on **FDI, interest rates and trade openness** versus **broad money (% of GDP)** in Indonesia, Malaysia, the Philippines, Thailand and Vietnam, **2011-2023**.
 
-**Live demo:** `https://<your-username>.github.io/<repo-name>/`
+**Live demo:** `https://aryautra.github.io/What-Moves-Broad-Money-Evidence-from-Five-Asian-Economies/`
 
 ## What it does
 - **Step-by-step hypotheses:** each relationship shown as a numbered chain from cause to effect, with its expected direction (FDI positive, interest rate negative, trade openness positive).
