@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Broad Money in Five Asian Economies, 2011-2023</title>
+<style>
+:root{--bg:#f4f6f8;--fg:#14212b;--card:#fff;--m:#5b6b78;--a:#0b7285;--b:#d8dee3;--good:#2b8a3e;--bad:#c92a2a;--c2:#e8590c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--c2:#ffa94d;--bg:#10171d;--fg:#e6edf2;--card:#18222b;--m:#93a4b2;--a:#3bc9db;--b:#2b3944;--good:#69db7c;--bad:#ff8787;color-scheme:dark}}
+:root[data-theme=dark]{--c2:#ffa94d;--bg:#10171d;--fg:#e6edf2;--card:#18222b;--m:#93a4b2;--a:#3bc9db;--b:#2b3944;--good:#69db7c;--bad:#ff8787;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+main{max-width:980px;margin:0 auto;padding:12px}
+.slide{background:var(--card);border:1px solid var(--b);border-radius:12px;padding:18px;margin:14px 0}
+h1{font-size:1.6rem;margin:0 0 4px}h2{font-size:1.15rem;margin:0 0 4px}.sub,.note{color:var(--m);font-size:.85rem}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin-top:14px}
+.kpi{border:1px solid var(--b);border-radius:10px;padding:10px}.kpi b{display:block;font-size:1.4rem}.kpi span{font-size:.75rem;color:var(--m)}
+.good{color:var(--good)}.bad{color:var(--bad)}
+.ctl{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;flex-wrap:wrap;gap:8px;padding:8px 0}
+.ctl label{font-size:.75rem;color:var(--m);display:flex;flex-direction:column;flex:1 1 130px}
+select,button{font:inherit;padding:6px;border:1px solid var(--b);border-radius:8px;background:var(--card);color:var(--fg)}
+button{cursor:pointer;align-self:flex-end}
+svg{width:100%;height:auto;display:block}svg text{fill:var(--m);font-size:10px}.gl{stroke:var(--b)}
+.l1{stroke:var(--a);fill:none;stroke-width:2.5}.l2{stroke:var(--c2);fill:none;stroke-width:2.5}.l3{stroke:var(--m);fill:none;stroke-width:2;stroke-dasharray:5 4}.d1{fill:var(--a)}.d2{fill:var(--c2)}
+.bar{fill:var(--m);opacity:.55}.bar.hl1{fill:var(--a);opacity:1}.bar.hl2{fill:var(--c2);opacity:1}.pr{stroke:var(--fg);stroke-dasharray:3 3}
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}.chain span{border:1px solid var(--b);border-radius:8px;padding:4px 8px;font-size:.85rem}.chain span:last-child{border-color:var(--a);font-weight:600}.chain i{color:var(--m);font-style:normal}.steps{display:flex;flex-direction:column;margin:12px 0}.st{display:flex;gap:14px;align-items:center;border:1px solid var(--b);border-radius:12px;padding:16px 18px;font-size:1.1rem}.st .n{flex:0 0 36px;height:36px;line-height:36px;text-align:center;border-radius:50%;background:var(--a);color:var(--card)}.st.last{border:2px solid var(--a);font-weight:600}.ar{text-align:center;color:var(--m);font-size:1.4rem;line-height:1.4}.sum{border:1px solid var(--b);border-radius:10px;padding:10px 14px;margin-top:10px}.sum p{margin:6px 0}.sp{fill:var(--m);opacity:.5}.sa{fill:var(--a)}.sb{fill:var(--c2)}.tl{stroke:var(--fg);stroke-dasharray:4 3;fill:none}table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{padding:6px 8px;border-bottom:1px solid var(--b);text-align:right}th:first-child,td:first-child{text-align:left}ul{padding-left:18px;margin:8px 0}li{margin:6px 0}
+@media print{@page{size:13.333in 7.5in;margin:.4in}.ctl,button{display:none}.slide{break-after:page;break-inside:avoid;border:0}body{background:#fff}}
+</style>
+</head><body><main>
+<header class="slide"><h1>Broad Money in Five Asian Economies, 2011-2023</h1>
+<div class="sub">How FDI, interest rates and trade openness relate to broad money (% of GDP) in Indonesia, Malaysia, the Philippines, Thailand and Vietnam. Sources: World Bank and each country's central bank.</div>
+<div class="ctl" style="position:static"><label>Summary cards show<select id="kp"></select></label></div><div class="kpis" id="kpi"></div></header>
+<div class="ctl">
+<label>Indicator<select id="ind"></select></label><label>Country A<select id="area"></select></label>
+<label>Country B (compare)<select id="area2"></select></label>
+<label>Year<select id="yr"></select></label>
+<button onclick="print()">Print / PDF</button></div>
+<section class="slide"><h2 id="h1"></h2><div class="ctl" style="position:static"><label>From year<select id="y0"></select></label><label>To year<select id="y1"></select></label><button onclick="$('y0').value=Y[0];$('y1').value=Y[L];render()">Full range</button></div><div class="note" id="n1"></div><div id="c1"></div></section>
+<section class="slide"><h2 id="h2"></h2><div class="note" id="n2"></div><div id="c2"></div></section>
+<section class="slide"><h2 id="h3"></h2><table id="tb"></table><div class="note">Gap = Country A minus Country B.</div></section>
+<section class="slide"><h2>What moves with broad money?</h2><div class="ctl" style="position:static"><label>Relationship (cause → effect)<select id="pair"></select></label><label>Show<select id="sc"></select></label></div><div id="fw"></div><div class="sum" id="sm"></div></section>
+<section class="slide"><h2 id="h4"></h2><ul id="ins"></ul><div class="note">Generated from the data and the indicator, year and countries selected above.</div></section>
+<section class="slide"><h2>Data and methods</h2><ul class="note">
+<li><b>Countries and period:</b> Indonesia, Malaysia, the Philippines, Thailand and Vietnam, annual data for 2011-2023.</li>
+<li><b>Broad money:</b> broad money as a percentage of GDP (World Bank). This is the dependent variable.</li>
+<li><b>FDI:</b> net foreign direct investment inflows, balance of payments, current US$ (World Bank), expressed as a natural logarithm.</li>
+<li><b>Interest rate:</b> policy rate in percent, from each country's central bank.</li>
+<li><b>Trade openness:</b> trade as a percentage of GDP (World Bank).</li>
+<li><b>Method:</b> descriptive comparison of the indicators, plus Pearson correlation between each explanatory variable and broad money, across all country-years and within each country over time.</li></ul></section>
+</main>
+<script>
+const D={"y":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"n":{"IDN":"Indonesia","MYS":"Malaysia","PHL":"Philippines","THA":"Thailand","VNM":"Vietnam"},"c":["IDN","MYS","PHL","THA","VNM"],"d":{"bm":{"IDN":[36.74,38.39,39.08,39.48,39.46,40.36,39.88,38.82,38.76,44.72,46.36,43.54,42.25],"MYS":[133.89,136.8,140.09,137.1,132.81,128.58,122.53,125.08,122.91,137.09,132.55,119.0,123.94],"PHL":[57.38,56.3,66.84,68.57,70.92,74.06,75.42,74.52,76.6,90.49,90.37,85.86,92.98],"THA":[119.93,121.12,124.37,127.05,127.73,125.4,124.04,122.82,123.4,146.59,148.65,143.83,141.92],"VNM":[78.37,84.82,93.76,101.73,111.17,120.64,123.51,124.99,129.15,140.6,146.16,136.26,154.52]},"fdi":{"IDN":[23.747,23.777,23.871,23.947,23.708,22.237,23.744,23.663,23.942,23.677,23.778,23.93,23.793],"MYS":[23.439,22.909,23.148,23.086,23.011,23.324,22.961,22.84,22.938,22.124,23.731,23.433,22.792],"PHL":[21.42,21.891,22.042,22.471,22.453,22.837,23.051,23.021,22.883,22.643,23.207,22.974,22.912],"THA":[21.629,23.28,23.492,22.328,22.912,21.972,22.838,23.344,22.434,22.18,23.457,23.196,22.598],"VNM":[22.729,22.848,22.909,22.942,23.191,23.257,23.369,23.464,23.503,23.483,23.474,23.608,23.641]},"rate":{"IDN":[6,6,7.5,7.75,7.25,4.75,4.25,6,5,3.75,3.5,5.5,6],"MYS":[2.75,3,3,3.25,3.25,3,3,3.25,3,1.75,1.75,2.75,3],"PHL":[4,4.5,3.5,3.5,4,3,3,4.75,4,2,2,5.5,6.5],"THA":[3,2.75,2.25,2,1.5,1.5,1.5,1.75,1.25,0.5,0.5,1.25,2.5],"VNM":[14,10,7,6.5,6.5,6.5,6.25,6.25,6,4,4,6,4.5]},"trade":{"IDN":[50.18,49.58,48.64,48.08,41.94,37.42,39.36,43.07,37.63,32.97,40.2,45.46,41.34],"MYS":[154.94,147.84,142.72,138.31,131.37,126.9,133.16,130.4,123.03,116.79,134.04,146.51,132.06],"PHL":[60.8,57.84,55.82,57.47,59.14,61.78,68.17,72.16,68.84,58.17,63.48,72.43,67.42],"THA":[139.68,137.67,132.46,130.91,124.84,120.58,120.89,120.84,109.69,97.8,117.25,132.86,128.82],"VNM":[125.26,123.22,130.85,135.41,144.91,145.41,160.98,164.66,164.7,163.25,186.68,183.15,164.82]}}},Y=D.y,C=D.c,L=Y.length-1,$=id=>document.getElementById(id);
+const I={bm:{l:"Broad money",u:"% of GDP",d:1},fdi:{l:"FDI net inflows",u:"ln of US$",d:2},rate:{l:"Interest rate",u:"%",d:2},trade:{l:"Trade openness",u:"% of GDP",d:1}};
+const nm=c=>D.n[c],f=(v,k)=>v==null?"n/a":v.toFixed(I[k].d),V=(k,c,i)=>D.d[k][c][i],AV=(k,i)=>C.reduce((s,c)=>s+V(k,c,i),0)/C.length;
+$("ind").innerHTML=Object.keys(I).map(k=>`<option value="${k}">${I[k].l}</option>`).join("");
+$("area").innerHTML=C.map(c=>`<option value="${c}">${nm(c)}</option>`).join("");$("area").value="IDN";
+$("area2").innerHTML=$("area").innerHTML;$("area2").value="MYS";
+$("yr").innerHTML=Y.map(y=>`<option>${y}</option>`).join("");$("yr").value=Y[L];$("y0").innerHTML=$("y1").innerHTML=Y.map(y=>`<option>${y}</option>`).join("");$("y0").value=Y[0];$("y1").value=Y[L];$("kp").innerHTML='<option value="avg">5-country average</option>'+C.map(c=>`<option value="${c}">${nm(c)}</option>`).join("");
+function line(el,ser,k,T){const W=640,H=270,l=46,r=14,t=14,b=26,{r0,r1,lo,hi}=T,x=i=>l+(i-r0)*(W-l-r)/(r1-r0),y=v=>t+(hi-v)*(H-t-b)/(hi-lo),dp=hi-lo<1?2:hi-lo<10?1:0,st=r1-r0>8?2:1;
+let h=`<svg viewBox="0 0 ${W} ${H}"><defs><clipPath id="cp"><rect x="${l}" y="0" width="${W-l-r}" height="${H-b}"/></clipPath></defs>`;
+for(let i=0;i<=4;i++){const v=lo+(hi-lo)*i/4,q=y(v);h+=`<line class="gl" x1="${l}" x2="${W-r}" y1="${q}" y2="${q}"/><text x="${l-6}" y="${q+3}" text-anchor="end">${v.toFixed(dp)}</text>`}
+Y.forEach((yr,i)=>{if(i>=r0-.01&&i<=r1+.01&&i%st==0)h+=`<text x="${x(i)}" y="${H-8}" text-anchor="middle">${yr}</text>`});
+h+=`<g clip-path="url(#cp)">`;
+ser.forEach((s,j)=>{let d="";s.v.forEach((v,i)=>{d+=(i?"L":"M")+x(i).toFixed(1)+" "+y(v).toFixed(1)});h+=`<path class="l${j+1}" d="${d}"/>`;
+if(j<2)s.v.forEach((v,i)=>{if(i>=r0-1&&i<=r1+1)h+=`<circle class="d${j+1}" cx="${x(i)}" cy="${y(v)}" r="3"><title>${s.n} ${Y[i]}: ${f(v,k)}</title></circle>`})});
+h+="</g></svg><div class='note'>"+ser.map((s,j)=>`<b style="color:${["var(--a)","var(--c2)","var(--m)"][j]}">${j<2?"━ ":"- - "}</b>${s.n}`).join(" &nbsp; ")+"</div>";el.innerHTML=h}
+let CS=null,raf=0,lk="";
+function lz(ser,key){const t0=Y.indexOf(+$("y0").value),t1=Y.indexOf(+$("y1").value),k=$("ind").value,vis=ser.flatMap(s=>s.v.slice(t0,t1+1)),a=Math.min(...vis),z=Math.max(...vis),pd=(z-a)*.1||1,T={r0:t0,r1:t1,lo:a-pd,hi:z+pd};
+cancelAnimationFrame(raf);
+if(!CS||key!=lk||(CS.r0==T.r0&&CS.r1==T.r1&&CS.lo==T.lo&&CS.hi==T.hi)){CS=T;lk=key;line($("c1"),ser,k,T);return}
+const S=CS,t=performance.now(),step=n=>{let u=Math.min(1,(n-t)/450);u=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;const m=q=>S[q]+(T[q]-S[q])*u;CS={r0:m("r0"),r1:m("r1"),lo:m("lo"),hi:m("hi")};line($("c1"),ser,k,CS);if(u<1)raf=requestAnimationFrame(step)};raf=requestAnimationFrame(step)}
+function rg(w){let a=+$("y0").value,z=+$("y1").value;if(a>=z){if(w==0){z=Math.min(Y[L],a+1);a=Math.min(a,z-1)}else{a=Math.max(Y[0],z-1);z=Math.max(z,a+1)}}$("y0").value=a;$("y1").value=z;render()}
+function bars(el,it,k,ref){const W=520,LW=118,R=56,rh=20,H=it.length*rh+8,vs=it.map(i=>i.v).concat(ref==null?[]:[ref]),mn=Math.min(0,...vs),mx=Math.max(0,...vs),sc=(W-LW-R)/(mx-mn||1),z=LW-mn*sc;
+let h=`<svg viewBox="0 0 ${W} ${H}">`;it.forEach((o,i)=>{const yy=i*rh+4,w=Math.abs(o.v)*sc,x=o.v<0?z-w:z;
+h+=`<text x="${LW-6}" y="${yy+13}" text-anchor="end">${o.n}</text><rect class="bar${o.h?" hl"+o.h:""}" x="${x}" y="${yy+2}" width="${w}" height="${rh-6}"><title>${o.n}: ${f(o.v,k)}</title></rect><text x="${o.v<0?z+4:z+o.v*sc+4}" y="${yy+13}">${f(o.v,k)}</text>`});
+if(ref!=null)h+=`<line class="pr" x1="${z+ref*sc}" x2="${z+ref*sc}" y1="0" y2="${H}"/>`;el.innerHTML=h+"</svg>"}
+
+function render(){const k=$("ind").value,a=$("area").value,b=$("area2").value,yi=Y.indexOf(+$("yr").value),m="l",u=I[k].u,avg=Y.map((_,i)=>AV(k,i));
+$("h1").textContent=`${nm(a)} vs ${nm(b)}: ${I[k].l}, ${$("y0").value} to ${$("y1").value}`;$("n1").textContent="Unit: "+u+". Dashed line: five-country average.";
+lz([{n:nm(a),v:D.d[k][a]},{n:nm(b),v:D.d[k][b]},{n:"Five-country average",v:avg}],k+a+b);
+const it=C.map(c=>({n:nm(c),h:c==a?1:c==b?2:0,v:m=="l"?V(k,c,yi):V(k,c,yi)-V(k,c,0)})).sort((p,q)=>q.v-p.v),ref=m=="l"?avg[yi]:avg[yi]-avg[0];
+$("h2").textContent=m=="l"?`${I[k].l} by country, ${Y[yi]}`:`Change in ${I[k].l}, ${Y[0]} to ${Y[yi]}`;
+$("n2").textContent="Teal: "+nm(a)+", orange: "+nm(b)+". Dashed line: five-country average ("+f(ref,k)+"). Unit: "+u;
+bars($("c2"),it,k,ref);h2h(a,b,yi);rel(a,b,yi);ins(k,a,b,yi)}
+function kpis(){const s=$("kp").value,g=(k,i)=>s=="avg"?AV(k,i):V(k,s,i);$("kpi").innerHTML=Object.keys(I).map(k=>{const a=g(k,0),b=g(k,L),d=b-a;return `<div class="kpi"><span>${I[k].l}, ${I[k].u} (${s=="avg"?"5-country average":nm(s)})</span><b>${f(b,k)}</b><span>${d>0?"+":""}${d.toFixed(I[k].d)} since ${Y[0]}</span></div>`}).join("")}
+function h2h(a,b,yi){$("h3").textContent=`Head-to-head: ${nm(a)} vs ${nm(b)}, ${Y[yi]}`;
+$("tb").innerHTML=`<tr><th>Indicator</th><th>${nm(a)}</th><th>${nm(b)}</th><th>Gap</th></tr>`+Object.keys(I).map(k=>{const x=V(k,a,yi),z=V(k,b,yi);return `<tr><td>${I[k].l} (${I[k].u})</td><td>${f(x,k)}</td><td>${f(z,k)}</td><td>${(x-z>0?"+":"")+(x-z).toFixed(I[k].d)}</td></tr>`}).join("")}
+function ins(k,a,b,yi){const E=I[k],dp=E.d,yr=Y[yi],fx=(v,s)=>(s&&v>0?"+":"")+v.toFixed(dp),ar=C.map(c=>({c,v:V(k,c,yi),d:V(k,c,yi)-V(k,c,0)})),hi=[...ar].sort((p,q)=>q.v-p.v),ch=[...ar].sort((p,q)=>p.d-q.d),n=ar.length,o=[];
+$("h4").textContent=`Key findings: ${E.l} (${yr})`;
+o.push(`Five-country average: ${fx(AV(k,yi))} in ${yr}, compared with ${fx(AV(k,0))} in ${Y[0]} (${fx(AV(k,yi)-AV(k,0),1)}).`);
+o.push(`Highest in ${yr}: ${nm(hi[0].c)} (${fx(hi[0].v)}). Lowest: ${nm(hi[n-1].c)} (${fx(hi[n-1].v)}).`);
+o.push(`Largest increase since ${Y[0]}: ${nm(ch[n-1].c)} (${fx(ch[n-1].d,1)}). Largest decrease: ${nm(ch[0].c)} (${fx(ch[0].d,1)}).`);
+const x=V(k,a,yi),z=V(k,b,yi);if(a!=b){const g0=Math.abs(V(k,a,0)-V(k,b,0)),g1=Math.abs(x-z);o.push(`${nm(a)} (${fx(x)}) vs ${nm(b)} (${fx(z)}): a gap of ${g1.toFixed(dp)} in ${yr}; it ${g1<g0?"narrowed":"widened"} from ${g0.toFixed(dp)} in ${Y[0]}.`)}
+const i20=Y.indexOf(2020),i19=i20-1;
+if(k=="bm")o.push(`${C.filter(c=>{const v=D.d.bm[c];return [2020,2021].includes(Y[v.indexOf(Math.max(...v))])}).length} of ${n} countries had their highest broad money ratio in 2020 or 2021, the pandemic years.`);
+if(k=="fdi")o.push(`FDI inflows are higher than in ${Y[0]} in ${ar.filter(w=>w.d>0).length} of ${n} countries.`);
+if(k=="rate")o.push(`Policy rates were cut in 2020 (versus 2019) in ${C.filter(c=>V(k,c,i20)<V(k,c,i19)).length} of ${n} countries.`);
+if(k=="trade")o.push(`Trade openness fell in 2020 (versus 2019) in ${C.filter(c=>V(k,c,i20)<V(k,c,i19)).length} of ${n} countries.`);
+$("ins").innerHTML=o.map(w=>`<li>${w}</li>`).join("")}
+const PR=[
+{x:"fdi",s:1,c:["FDI inflows rise","More foreign capital enters the economy and banks","Deposits and bank liquidity increase","The money supply grows relative to GDP","Broad money rises"],a:"FDI is measured in log US$ and is not scaled by GDP, so economies of different size are hard to compare directly; inside a country, higher inflows tend to move with deeper broad money."},
+{x:"rate",s:-1,c:["Interest rate rises","Loans become more expensive and holding money costs more","Demand for credit and money falls","Bank money creation slows","Broad money falls"],a:"Central banks often raise rates when money and credit are already growing fast, which can blur the link."},
+{x:"trade",s:1,c:["Trade openness rises","More export earnings and foreign exchange inflows","Bank deposits and trade finance expand","Credit and the money supply grow","Broad money rises"],a:"Trade-heavy economies tend to have deeper financial systems for other reasons too, so the link may reflect economic structure."}];
+$("pair").innerHTML=PR.map((p,i)=>`<option value="${i}">${I[p.x].l} → Broad money</option>`).join("");
+const st=ps=>{const n=ps.length,mx=ps.reduce((s,q)=>s+q.x,0)/n,my=ps.reduce((s,q)=>s+q.y,0)/n;let sxx=0,sxy=0,syy=0;ps.forEach(q=>{sxx+=(q.x-mx)**2;sxy+=(q.x-mx)*(q.y-my);syy+=(q.y-my)**2});return{n,r:sxy/Math.sqrt(sxx*syy)}},
+lv=(k,c,i)=>k=="fdi"?Math.exp(V(k,c,i)):V(k,c,i),XN={fdi:"FDI inflows",rate:"the interest rate",trade:"trade openness"},HN={fdi:"Higher FDI inflows",rate:"A higher interest rate",trade:"Higher trade openness"};
+$("sc").innerHTML=$("kp").innerHTML;
+function rel(){const p=PR[+$("pair").value],s=$("sc").value,all=s=="avg",cs=all?C:[s],X=XN[p.x],pts=[];
+cs.forEach(c=>Y.forEach((yr,i)=>pts.push({c,x:V(p.x,c,i),y:V("bm",c,i)})));
+const vd=r=>{const ab=Math.abs(r),sg=r>0?1:-1,ok=ab>=.2&&sg==p.s;return{ok,h:`<b class="${ab<.2?"":ok?"good":"bad"}">${ab<.2?"●":sg>0?"▲":"▼"} ${ab<.2?"No clear relationship":ok?(ab>=.3?"Supports the expected direction":"Expected direction, but weak"):"Opposite to the expected direction"}</b> &middot; r = ${r.toFixed(2)} (${ab>=.6?"strong":ab>=.3?"moderate":ab>=.2?"weak":"very weak"})`}},
+v1=vd(st(pts).r);let ln=`<p>${all?"All countries and years pooled":nm(s)+", "+Y[0]+" to "+Y[L]}: ${v1.h}</p>`,ok=v1.ok;
+if(all){const mn={};C.forEach(c=>{const q=pts.filter(w=>w.c==c);mn[c]=[q.reduce((t,w)=>t+w.x,0)/q.length,q.reduce((t,w)=>t+w.y,0)/q.length]});
+const v2=vd(st(pts.map(q=>({x:q.x-mn[q.c][0],y:q.y-mn[q.c][1]}))).r);ln+=`<p>Within each country (changes over time): ${v2.h}</p>`;ok=ok&&v2.ok}
+let m=0,e=0;cs.forEach(c=>{for(let i=1;i<=L;i++){const dx=lv(p.x,c,i)-lv(p.x,c,i-1),dy=V("bm",c,i)-V("bm",c,i-1);if(dx&&dy){m++;if((dx*dy>0)==(p.s>0))e++}}});
+const sh=e/m,vt=sh>=.6?"So for this view, the data supports the expected effect.":sh<=.4?"So for this view, the data points the opposite way from the theory.":"So for this view, the pattern is mixed.";
+$("fw").innerHTML=`<div style="font-size:1.1rem;margin:10px 0"><b>Hypothesis:</b> ${HN[p.x]} → ${p.s>0?"higher":"lower"} broad money (${p.s>0?"▲ positive":"▼ negative"} relationship)</div><div class="steps">${p.c.map((t,i)=>`<div class="st${i==p.c.length-1?" last":""}"><span class="n">${i+1}</span><span>${t}</span></div>`).join('<div class="ar">↓</div>')}</div>`;
+$("sm").innerHTML=`<b>What the data shows: ${all?"all five countries":nm(s)}</b><p>In ${e} of ${m} year-to-year changes (${Math.round(sh*100)}%), broad money moved ${p.s>0?"in the same direction as":"in the opposite direction to"} ${X}${all?" (counted across the five countries)":""}. About 50% is what chance alone would give. ${vt}</p>${ln}<div class="note">r is the correlation coefficient: +1 means they move together perfectly, -1 means they move in opposite directions, 0 means no link. Correlation is not causation.</div>`+(sh<.6||!ok?`<div class="note"><b>Why the data may differ:</b> ${p.a}</div>`:"")}
+["ind","area","area2","yr","pair","sc"].forEach(i=>$(i).onchange=render);$("kp").onchange=kpis;$("y0").onchange=()=>rg(0);$("y1").onchange=()=>rg(1);kpis();render();
+</script></body></html>
